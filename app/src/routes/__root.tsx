@@ -2,17 +2,14 @@ import { createRootRoute, Outlet, useNavigate, useRouterState } from "@tanstack/
 import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
 import { useEffect } from "react";
 import { useCurrentUser } from "../features/auth/hooks/useCurrentUser";
+import { LoadingScreen } from "../components/shared/LoadingScreen";
+import { AppLayout } from "../features/shell/components/AppLayout";
 
 function RootComponent() {
   return (
     <>
       <AuthLoading>
-        <div className="min-h-screen bg-[#0f172a] flex items-center justify-center text-slate-300">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-sm font-medium">Loading session...</p>
-          </div>
-        </div>
+        <LoadingScreen message="Loading session..." />
       </AuthLoading>
       <Unauthenticated>
         <AuthUnauthenticatedBoundary />
@@ -55,33 +52,30 @@ function AuthAuthenticatedBoundary() {
       }
     } else {
       if (state.location.pathname === "/login" || state.location.pathname === "/pending") {
-        navigate({ to: "/" });
+        navigate({ to: "/dashboard" });
       }
     }
   }, [user, isLoading, state.location.pathname, navigate]);
 
   if (isLoading || !user) {
-    return (
-      <div className="min-h-screen bg-[#0f172a] flex items-center justify-center text-slate-300">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-sm font-medium">Checking profile...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen message="Checking profile..." />;
   }
 
+  // Pending users: only render the /pending route (no shell)
   if (!user.isActive) {
     if (state.location.pathname !== "/pending") {
       return null;
     }
-  } else {
-    if (state.location.pathname === "/login" || state.location.pathname === "/pending") {
-      return null;
-    }
+    return <Outlet />;
   }
 
-  return <Outlet />;
+  // Active users: login/pending should redirect, so render nothing until navigation fires
+  if (state.location.pathname === "/login" || state.location.pathname === "/pending") {
+    return null;
+  }
+
+  // Active users: render inside shell layout
+  return <AppLayout />;
 }
 
 export const Route = createRootRoute({
