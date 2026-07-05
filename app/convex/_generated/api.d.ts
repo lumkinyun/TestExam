@@ -11,8 +11,12 @@
 import type * as auth from "../auth.js";
 import type * as crons from "../crons.js";
 import type * as http from "../http.js";
+import type * as lib_audit from "../lib/audit.js";
+import type * as lib_authorization from "../lib/authorization.js";
 import type * as lib_errors from "../lib/errors.js";
 import type * as lib_validators from "../lib/validators.js";
+import type * as testHelpers from "../testHelpers.js";
+import type * as users from "../users.js";
 
 import type {
   ApiFromModules,
@@ -24,8 +28,12 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   crons: typeof crons;
   http: typeof http;
+  "lib/audit": typeof lib_audit;
+  "lib/authorization": typeof lib_authorization;
   "lib/errors": typeof lib_errors;
   "lib/validators": typeof lib_validators;
+  testHelpers: typeof testHelpers;
+  users: typeof users;
 }>;
 
 /**
