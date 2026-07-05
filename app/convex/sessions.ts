@@ -223,3 +223,18 @@ export const getSession = query({
     return ctx.db.get(args.id);
   },
 });
+
+export const listFaculties = query({
+  args: {
+    activeOnly: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    await requireActiveUser(ctx);
+    const faculties = await ctx.db.query("faculties").collect();
+    if (args.activeOnly) {
+      return faculties.filter((f) => f.isActive);
+    }
+    return faculties;
+  },
+});
+

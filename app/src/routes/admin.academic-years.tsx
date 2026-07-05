@@ -1,9 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import AcademicYearsPage from "@/features/academics/components/AcademicYearsPage";
 
 export const Route = createFileRoute("/admin/academic-years")({
-  component: AdminAcademicYearsPage,
+  component: AcademicYearsPage,
 });
 
-function AdminAcademicYearsPage() {
-  return <div>Admin — Academic Years</div>;
-}

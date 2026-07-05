@@ -18,7 +18,12 @@ vi.mock("sonner", () => ({
 
 // Mock convex api
 vi.mock("@/lib/convex", () => ({
-  api: {},
+  api: {
+    subjects: {
+      createSubject: "createSubject",
+      updateSubject: "updateSubject",
+    },
+  },
 }));
 
 const mockOnClose = vi.fn();
@@ -83,7 +88,7 @@ describe("SubjectDialog", () => {
       await user.click(screen.getByRole("button", { name: /save|create|submit/i }));
 
       await waitFor(() => {
-        expect(screen.queryByText(/title.*required|required.*title|course title/i) !== null ||
+        expect(screen.queryByText(/title.*required|required.*title/i) !== null ||
           screen.queryAllByRole("alert").length > 0).toBe(true);
       });
     });
@@ -98,7 +103,7 @@ describe("SubjectDialog", () => {
       // Should not show error for valid code
       await waitFor(() => {
         const errorText = screen.queryByText(/invalid.*course code|course code.*invalid/i);
-        // If there's no course title error, code is valid
+        expect(errorText).toBeNull();
         expect(codeInput).toHaveValue("BTMH3523");
       });
     });
