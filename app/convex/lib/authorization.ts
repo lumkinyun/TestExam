@@ -75,8 +75,9 @@ export async function requireCaseAccess(
   // Check if team member / team moderator
   const teamMember = await ctx.db
     .query("assignmentTeamMembers")
-    .withIndex("by_assignment", (q) => q.eq("assignmentId", assignment._id))
-    .filter((q) => q.eq(q.field("userId"), user._id))
+    .withIndex("by_assignment_user", (q) =>
+      q.eq("assignmentId", assignment._id).eq("userId", user._id)
+    )
     .unique();
 
   if (teamMember) {
@@ -128,8 +129,9 @@ export async function requireCaseActor(
     case "team_moderator":
       const teamMember = await ctx.db
         .query("assignmentTeamMembers")
-        .withIndex("by_assignment", (q) => q.eq("assignmentId", assignment._id))
-        .filter((q) => q.eq(q.field("userId"), user._id))
+        .withIndex("by_assignment_user", (q) =>
+          q.eq("assignmentId", assignment._id).eq("userId", user._id)
+        )
         .unique();
       hasRole = !!teamMember;
       break;

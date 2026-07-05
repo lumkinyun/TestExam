@@ -34,6 +34,10 @@ function AuthUnauthenticatedBoundary() {
     }
   }, [state.location.pathname, navigate]);
 
+  if (state.location.pathname !== "/login") {
+    return null;
+  }
+
   return <Outlet />;
 }
 
@@ -56,7 +60,7 @@ function AuthAuthenticatedBoundary() {
     }
   }, [user, isLoading, state.location.pathname, navigate]);
 
-  if (isLoading) {
+  if (isLoading || !user) {
     return (
       <div className="min-h-screen bg-[#0f172a] flex items-center justify-center text-slate-300">
         <div className="flex flex-col items-center gap-3">
@@ -65,6 +69,16 @@ function AuthAuthenticatedBoundary() {
         </div>
       </div>
     );
+  }
+
+  if (!user.isActive) {
+    if (state.location.pathname !== "/pending") {
+      return null;
+    }
+  } else {
+    if (state.location.pathname === "/login" || state.location.pathname === "/pending") {
+      return null;
+    }
   }
 
   return <Outlet />;

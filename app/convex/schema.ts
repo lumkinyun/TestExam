@@ -78,7 +78,8 @@ export default defineSchema({
     userId: v.id("users"),
   })
     .index("by_assignment", ["assignmentId"])
-    .index("by_user", ["userId"]),
+    .index("by_user", ["userId"])
+    .index("by_assignment_user", ["assignmentId", "userId"]),
 
   moderationCases: defineTable({
     assignmentId: v.id("assignments"),
