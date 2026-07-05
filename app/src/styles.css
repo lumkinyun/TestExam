@@ -1,0 +1,132 @@
+/* MUJI-inspired theme tokens applied on top of shadcn/ui defaults. */
+/* Light mode only — no .dark selectors.                             */
+/* OVERRIDE: 2026-07-05                                               */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ─── MUJI-inspired light-mode tokens ──────────────────────────────────────
+   Warm-white background, stone borders, charcoal text, muted warm-sage accent.
+   Accessible focus ring with high contrast.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+    /* Background: warm off-white paper */
+    --background: #f7f5f2;
+    --foreground: #2c2c2c;
+
+    /* Card / popover */
+    --card: #faf9f7;
+    --card-foreground: #2c2c2c;
+    --popover: #faf9f7;
+    --popover-foreground: #2c2c2c;
+
+    /* Primary: charcoal — used for buttons, active states */
+    --primary: #2c2c2c;
+    --primary-foreground: #f7f5f2;
+
+    /* Secondary: warm stone */
+    --secondary: #ede9e4;
+    --secondary-foreground: #2c2c2c;
+
+    /* Muted: lighter stone */
+    --muted: #e8e4df;
+    --muted-foreground: #6b6560;
+
+    /* Accent: muted warm sage — subtle, accessible */
+    --accent: #d4dbd2;
+    --accent-foreground: #2c2c2c;
+
+    /* Destructive */
+    --destructive: oklch(0.577 0.245 27.325);
+
+    /* Borders: warm stone gray */
+    --border: #d8d0c8;
+    --input: #d8d0c8;
+
+    /* Focus ring: charcoal with opacity for high contrast */
+    --ring: #2c2c2c;
+
+    /* Chart tones using the warm palette */
+    --chart-1: #8fa48c;
+    --chart-2: #b5c0b3;
+    --chart-3: #d4dbd2;
+    --chart-4: #e8e4df;
+    --chart-5: #ede9e4;
+
+    --radius: 0.5rem;
+
+    /* Sidebar: slightly warmer white */
+    --sidebar: #f0ede9;
+    --sidebar-foreground: #2c2c2c;
+    --sidebar-primary: #2c2c2c;
+    --sidebar-primary-foreground: #f7f5f2;
+    --sidebar-accent: #d4dbd2;
+    --sidebar-accent-foreground: #2c2c2c;
+    --sidebar-border: #d8d0c8;
+    --sidebar-ring: #2c2c2c;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+
+  /* Accessible focus ring — always visible, high contrast */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
