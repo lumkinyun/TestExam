@@ -5,24 +5,25 @@ import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { useIsMobile } from "src/hooks/use-mobile"
-import { cn } from "src/lib/utils"
-import { Button } from "src/components/ui/button"
-import { Input } from "src/components/ui/input"
-import { Separator } from "src/components/ui/separator"
+// OVERRIDE: 2026-07-05 — rerouted to shell feature hook; global hooks/ dir is banned by project constraints
+import { useIsMobile } from "@/features/shell/hooks/useIsMobile"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "src/components/ui/sheet"
-import { Skeleton } from "src/components/ui/skeleton"
+} from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "src/components/ui/tooltip"
+} from "@/components/ui/tooltip"
 import { PanelLeftIcon } from "lucide-react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"

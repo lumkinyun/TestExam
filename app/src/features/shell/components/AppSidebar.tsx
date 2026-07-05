@@ -50,7 +50,9 @@ const adminNavItems: NavItem[] = [
 
 function NavItemButton({ item }: { item: NavItem }) {
   const state = useRouterState();
-  const isActive = state.location.pathname.startsWith(item.to);
+  const isActive =
+    state.location.pathname === item.to ||
+    state.location.pathname.startsWith(item.to + "/");
 
   return (
     <SidebarMenuItem>
