@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as academicYears from "../academicYears.js";
 import type * as auth from "../auth.js";
 import type * as crons from "../crons.js";
 import type * as http from "../http.js";
@@ -15,6 +16,8 @@ import type * as lib_audit from "../lib/audit.js";
 import type * as lib_authorization from "../lib/authorization.js";
 import type * as lib_errors from "../lib/errors.js";
 import type * as lib_validators from "../lib/validators.js";
+import type * as sessions from "../sessions.js";
+import type * as subjects from "../subjects.js";
 import type * as testHelpers from "../testHelpers.js";
 import type * as users from "../users.js";
 
@@ -25,6 +28,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  academicYears: typeof academicYears;
   auth: typeof auth;
   crons: typeof crons;
   http: typeof http;
@@ -32,6 +36,8 @@ declare const fullApi: ApiFromModules<{
   "lib/authorization": typeof lib_authorization;
   "lib/errors": typeof lib_errors;
   "lib/validators": typeof lib_validators;
+  sessions: typeof sessions;
+  subjects: typeof subjects;
   testHelpers: typeof testHelpers;
   users: typeof users;
 }>;
